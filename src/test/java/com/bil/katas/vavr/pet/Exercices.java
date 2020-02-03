@@ -3,14 +3,18 @@ package com.bil.katas.vavr.pet;
 import io.vavr.collection.Map;
 import io.vavr.collection.Seq;
 import io.vavr.collection.Vector;
+import io.vavr.control.Option;
 import org.hamcrest.CoreMatchers;
 import org.junit.Assert;
 import org.junit.Test;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.function.Function;
 import java.util.function.Predicate;
 
 import static com.bil.katas.vavr.pet.PetType.*;
+import static java.lang.Integer.MAX_VALUE;
 
 /**
  * By doing these exercises you should have learned about the following APIs.
@@ -23,6 +27,8 @@ import static com.bil.katas.vavr.pet.PetType.*;
  * {@link Seq#count(Predicate)}<br>
  * {@link Seq#map(Function)}<br>
  * {@link Seq#flatMap(Function)}<br>
+ * <p>
+ * {@link Seq#count(Predicate)}<br>
  * <p>
  */
 public class Exercices extends PetDomainKata {
@@ -105,5 +111,49 @@ public class Exercices extends PetDomainKata {
                 petTypes);
     }
 
+
+    //region count, minBy, maxBy, min, max
+    @Test
+    public void howManyPersonHaveCats() {
+        // use count
+        int count = people.count(p -> p.hasPetType(CAT));
+        Assert.assertEquals(2, count);
+    }
+
+    @Test
+    public void whoOwnsTheYoungestPet() {
+        // use minBy + min
+        Option<Person> person = people.minBy(p -> p.getPets().map(Pet::getAge).min().getOrElse(MAX_VALUE));
+        Assert.assertEquals("Jake", person.get().getFirstName());
+    }
+
+    @Test
+    public void whoOwnsTheOldestPet() {
+        // use maxBy + max
+        Option<Person> person = people.maxBy(p -> p.getPets().map(Pet::getAge).max().getOrElse(MAX_VALUE));
+        Assert.assertEquals("John", person.get().getFirstName());
+    }
+
+    @Test
+    public void averagePetAge() {
+        Option<Double> average = people.flatMap(Person::getPets).map(Pet::getAge).average();
+        Assert.assertEquals("1.89", new BigDecimal(average.get())
+                .setScale(2, RoundingMode.HALF_EVEN).toPlainString());
+    }
+
+    @Test
+    public void totalPetAge() {
+        Number average = people.flatMap(Person::getPets).map(Pet::getAge).sum();
+        Assert.assertEquals(17L, average);
+    }
+    //endregion
+
+    //region joining (mkString)
+    @Test
+    public void petsNameSorted() {
+        String sortedPetNames = people.flatMap(Person::getPets).map(Pet::getName).sorted().mkString(",");
+        Assert.assertEquals("Dolly,Fuzzy,Serpy,Speedy,Spike,Spot,Tabby,Tweety,Wuzzy", sortedPetNames);
+    }
+    //endregion
 
 }
