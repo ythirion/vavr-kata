@@ -6,6 +6,7 @@ import org.junit.Before;
 
 public abstract class PetDomainKata {
     protected Seq<Person> people;
+    protected Seq<Park> parks;
 
     @Before
     public void setUp() throws Exception {
@@ -22,6 +23,24 @@ public abstract class PetDomainKata {
                         .addPet(PetType.HAMSTER, "Fuzzy", 1)
                         .addPet(PetType.HAMSTER, "Wuzzy", 1),
                 new Person("John", "Doe")
+        );
+
+        this.parks = Vector.of(
+                new Park("Jurrassic")
+                        .addAuthorizedPetType(PetType.BIRD)
+                        .addAuthorizedPetType(PetType.SNAKE)
+                        .addAuthorizedPetType(PetType.TURTLE),
+                new Park("Central")
+                        .addAuthorizedPetType(PetType.BIRD)
+                        .addAuthorizedPetType(PetType.CAT)
+                        .addAuthorizedPetType(PetType.DOG),
+                new Park("Hippy")
+                        .addAuthorizedPetType(PetType.BIRD)
+                        .addAuthorizedPetType(PetType.CAT)
+                        .addAuthorizedPetType(PetType.DOG)
+                        .addAuthorizedPetType(PetType.TURTLE)
+                        .addAuthorizedPetType(PetType.HAMSTER)
+                        .addAuthorizedPetType(PetType.SNAKE)
         );
     }
 
