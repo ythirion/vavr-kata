@@ -22,10 +22,6 @@ public class Person {
         return name.equals(firstName + " " + lastName);
     }
 
-    public boolean hasPet(PetType petType) {
-        return pets.count(pet -> petType.equals(pet.getType())) > 0;
-    }
-
     public Map<PetType, Integer> getPetTypes() {
         return pets.groupBy(Pet::getType)
                 .map(e -> Map.entry(e._1, e._2.size()))
