@@ -1,14 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="def26779-0116-4ba8-b83b-126ea92b83ee" name="Default Changelist" comment="merge collections exercices">
-      <change beforePath="$PROJECT_DIR$/src/test/java/com/bil/katas/vavr/pet/Exercices.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/bil/katas/vavr/pet/CollectionsExercices.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/com/bil/katas/vavr/pet/Exercise2.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/com/bil/katas/vavr/pet/Exercise4.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/com/bil/katas/vavr/pet/Exercise8.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/vavr-kata.iml" beforeDir="false" afterPath="$PROJECT_DIR$/vavr-kata.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vavr-kata.ipr" beforeDir="false" afterPath="$PROJECT_DIR$/vavr-kata.ipr" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vavr-kata.iws" beforeDir="false" afterPath="$PROJECT_DIR$/vavr-kata.iws" afterDir="false" />
+    <list default="true" id="def26779-0116-4ba8-b83b-126ea92b83ee" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/src/test/java/com/bil/katas/vavr/pet/TryExercises.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/bil/katas/vavr/pet/CollectionsExercises.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/bil/katas/vavr/pet/CollectionsExercises.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/bil/katas/vavr/pet/Exercices.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/bil/katas/vavr/pet/PetDomainKata.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/bil/katas/vavr/pet/PetDomainKata.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -72,10 +69,10 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/test/java/com/bil/katas/vavr/pet/CollectionsExercices.java">
+        <entry file="file://$PROJECT_DIR$/src/test/java/com/bil/katas/vavr/pet/CollectionsExercises.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="185">
-              <caret line="67" column="8" lean-forward="true" selection-start-line="67" selection-start-column="8" selection-end-line="67" selection-end-column="8" />
+            <state relative-caret-position="671">
+              <caret line="242" column="42" selection-start-line="242" selection-start-column="42" selection-end-line="242" selection-end-column="42" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="n#!!doc;n#howManyPersonHaveCats#0;n#Exercices#0" />
@@ -86,10 +83,19 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/test/java/com/bil/katas/vavr/pet/TryExercises.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="126">
+              <caret line="6" selection-start-line="6" selection-end-line="6" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/test/java/com/bil/katas/vavr/pet/PetDomainKata.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-291">
-              <caret line="7" column="26" selection-start-line="7" selection-start-column="26" selection-end-line="7" selection-end-column="26" />
+            <state relative-caret-position="412">
+              <caret line="35" column="17" lean-forward="true" selection-start-line="35" selection-start-column="17" selection-end-line="35" selection-end-column="17" />
             </state>
           </provider>
         </entry>
@@ -112,8 +118,8 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Interface" />
-        <option value="Class" />
         <option value="Enum" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -129,7 +135,6 @@
         <option value="$PROJECT_DIR$/src/main/java/com/bil/katas/vavr/pet/PetType.java" />
         <option value="$PROJECT_DIR$/src/test/java/com/bil/katas/vavr/pet/PetDomainForKata.java" />
         <option value="$PROJECT_DIR$/pom.xml" />
-        <option value="$PROJECT_DIR$/src/test/java/com/bil/katas/vavr/pet/PetDomainKata.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/bil/katas/vavr/filtering/SeqKata.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/bil/katas/vavr/pet/Person.java" />
         <option value="$PROJECT_DIR$/src/test/java/com/bil/katas/vavr/pet/Exercise1Test.java" />
@@ -138,6 +143,9 @@
         <option value="$PROJECT_DIR$/src/test/java/com/bil/katas/vavr/pet/Exercise8.java" />
         <option value="$PROJECT_DIR$/src/test/java/com/bil/katas/vavr/pet/Exercices.java" />
         <option value="$PROJECT_DIR$/src/test/java/com/bil/katas/vavr/pet/CollectionsExercices.java" />
+        <option value="$PROJECT_DIR$/src/test/java/com/bil/katas/vavr/pet/TryExercises.java" />
+        <option value="$PROJECT_DIR$/src/test/java/com/bil/katas/vavr/pet/PetDomainKata.java" />
+        <option value="$PROJECT_DIR$/src/test/java/com/bil/katas/vavr/pet/CollectionsExercises.java" />
       </list>
     </option>
   </component>
@@ -461,6 +469,14 @@
       <workItem from="1574245167358" duration="1158000" />
       <workItem from="1574252679774" duration="6082000" />
     </task>
+    <task id="LOCAL-00001" summary="merge collections exercises">
+      <created>1581500174866</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1581500174866</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TestHistory">
@@ -487,13 +503,13 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="10015000" />
+    <option name="totallyTimeSpent" value="10231000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1696" height="1036" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.2683374" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.2683374" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Designer" order="2" />
       <window_info id="UI Designer" order="3" />
@@ -513,7 +529,7 @@
       <window_info anchor="bottom" id="Educational.CheckDetails" order="12" />
       <window_info anchor="bottom" id="Terminal" order="13" />
       <window_info anchor="bottom" id="Event Log" order="14" side_tool="true" />
-      <window_info active="true" anchor="bottom" id="Messages" order="15" visible="true" weight="0.32890365" />
+      <window_info anchor="bottom" id="Messages" order="15" weight="0.32890365" />
       <window_info anchor="right" id="Commander" order="0" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -529,7 +545,8 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="merge collections exercices" />
-    <option name="LAST_COMMIT_MESSAGE" value="merge collections exercices" />
+    <MESSAGE value="merge collections exercises" />
+    <option name="LAST_COMMIT_MESSAGE" value="merge collections exercises" />
   </component>
   <component name="editorHistoryManager">
     <entry file="jar://$PROJECT_DIR$/../../../../../mvnrepo/io/vavr/vavr/0.10.2/vavr-0.10.2.jar!/io/vavr/collection/List.class">
@@ -645,13 +662,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/com/bil/katas/vavr/pet/PetDomainKata.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-291">
-          <caret line="7" column="26" selection-start-line="7" selection-start-column="26" selection-end-line="7" selection-end-column="26" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/test/java/com/bil/katas/vavr/pet/Exercise2.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="105">
@@ -659,10 +669,24 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/com/bil/katas/vavr/pet/CollectionsExercices.java">
+    <entry file="file://$PROJECT_DIR$/src/test/java/com/bil/katas/vavr/pet/TryExercises.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="185">
-          <caret line="67" column="8" lean-forward="true" selection-start-line="67" selection-start-column="8" selection-end-line="67" selection-end-column="8" />
+        <state relative-caret-position="126">
+          <caret line="6" selection-start-line="6" selection-end-line="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/com/bil/katas/vavr/pet/PetDomainKata.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="412">
+          <caret line="35" column="17" lean-forward="true" selection-start-line="35" selection-start-column="17" selection-end-line="35" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/com/bil/katas/vavr/pet/CollectionsExercises.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="671">
+          <caret line="242" column="42" selection-start-line="242" selection-start-column="42" selection-end-line="242" selection-end-column="42" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="n#!!doc;n#howManyPersonHaveCats#0;n#Exercices#0" />

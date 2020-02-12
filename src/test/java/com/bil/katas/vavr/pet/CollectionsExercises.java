@@ -239,7 +239,7 @@ public class CollectionsExercises extends PetDomainKata {
                         .mapKeys(person -> person.getFirstName() + " " + person.getLastName())
                         .mapValues(persons -> persons.flatMap(person -> filterParksFor(person.getPets().map(Pet::getType))));
 
-        Assert.assertEquals(Vector.of("Jurrassic", "Central", "Hippy"), possibleParksForAWalkPerPerson.get("John Doe").get());
-        Assert.assertEquals(Vector.of("Jurrassic", "Hippy"), possibleParksForAWalkPerPerson.get("Jake Snake").get());
+        Assert.assertEquals(Vector.of("Jurassic", "Central", "Hippy"), possibleParksForAWalkPerPerson.get("John Doe").get());
+        Assert.assertEquals(Vector.of("Jurassic", "Hippy"), possibleParksForAWalkPerPerson.get("Jake Snake").get());
     }
 }

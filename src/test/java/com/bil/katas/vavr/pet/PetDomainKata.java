@@ -26,7 +26,7 @@ public abstract class PetDomainKata {
         );
 
         this.parks = Vector.of(
-                new Park("Jurrassic")
+                new Park("Jurassic")
                         .addAuthorizedPetType(PetType.BIRD)
                         .addAuthorizedPetType(PetType.SNAKE)
                         .addAuthorizedPetType(PetType.TURTLE),
