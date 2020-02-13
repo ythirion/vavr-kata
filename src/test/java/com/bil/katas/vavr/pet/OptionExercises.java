@@ -56,16 +56,21 @@ public class OptionExercises extends PetDomainKata {
     @Test
     public void chainCall() {
         // Chain calls to the half method 4 times with start in argument
-        // Assert the value of result
-        Double start = 100d;
+        // For each half append the value to the resultBuilder
+        Double start = 500d;
+        StringBuilder resultBuilder = new StringBuilder();
 
         Option<Double> result = half(start)
+                .peek(resultBuilder::append)
                 .flatMap(this::half)
+                .peek(resultBuilder::append)
                 .flatMap(this::half)
+                .peek(resultBuilder::append)
                 .flatMap(this::half)
-                .flatMap(this::half);
+                .peek(resultBuilder::append);
 
         Assert.assertEquals(result, Option.none());
+        Assert.assertEquals("250.0125.0", resultBuilder.toString());
     }
 
     private Option<Double> half(Double x) {
