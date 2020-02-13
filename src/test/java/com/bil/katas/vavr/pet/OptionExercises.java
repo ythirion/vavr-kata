@@ -25,9 +25,13 @@ public class OptionExercises extends PetDomainKata {
 
     @Test
     public void workingWithNull() {
-        // Instantiate an Option of null, this option must return the string "Ich bin empty" when empty
+        // Instantiate an Option of null (of type String)
+        // map it to an Upper case function
+        // then it must return the string "Ich bin empty" if empty
         Option<String> iamAnOption = Option.of(null);
-        String optionValue = iamAnOption.getOrElse("Ich bin empty");
+        String optionValue = iamAnOption
+                .map(p -> p.toUpperCase())
+                .getOrElse("Ich bin empty");
 
         Assert.assertTrue(iamAnOption.isEmpty());
         Assert.assertEquals("Ich bin empty", optionValue);
@@ -45,7 +49,7 @@ public class OptionExercises extends PetDomainKata {
 
     @Test(expected = IllegalArgumentException.class)
     public void findPersonOrDieTryin() {
-        // Find a person matching firstName and lastName ("",""), throws an IllegalArgumentException if not
+        // Find a person matching firstName and lastName, throws an IllegalArgumentException if not found
         String firstName = "Rick";
         String lastName = "Sanchez";
 
