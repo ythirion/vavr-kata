@@ -6,10 +6,24 @@ import io.vavr.control.Option;
 import org.junit.Assert;
 import org.junit.Test;
 
+import java.util.function.Consumer;
+import java.util.function.Function;
+import java.util.function.Supplier;
+
+/**
+ * By doing these exercises you should have learned :
+ * {@link Option#isDefined()}<br>
+ * {@link Option#isEmpty()}<br>
+ * {@link Option#map(Function)}<br>
+ * {@link Option#getOrElse(Object)}<br>
+ * {@link Option#getOrElseThrow(Supplier)}<br>
+ * {@link Option#peek(Consumer)}<br>
+ * {@link Option#flatMap(Function)}<br>
+ */
 public class OptionExercises extends PetDomainKata {
     @Test
     public void filterAListOfPerson() {
-        // Instantiate a list of defined persons
+        // Filter this list with only defined persons
         Seq<Option<Person>> persons = Vector.of(
                 Option.none(),
                 Option.of(new Person("John", "Doe")),
@@ -60,7 +74,7 @@ public class OptionExercises extends PetDomainKata {
     @Test
     public void chainCall() {
         // Chain calls to the half method 4 times with start in argument
-        // For each half append the value to the resultBuilder
+        // For each half append the value to the resultBuilder (side effect)
         Double start = 500d;
         StringBuilder resultBuilder = new StringBuilder();
 

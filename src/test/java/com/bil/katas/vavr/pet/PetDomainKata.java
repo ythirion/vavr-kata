@@ -2,7 +2,6 @@ package com.bil.katas.vavr.pet;
 
 import io.vavr.collection.Seq;
 import io.vavr.collection.Vector;
-import io.vavr.control.Option;
 import org.junit.Before;
 
 public abstract class PetDomainKata {
