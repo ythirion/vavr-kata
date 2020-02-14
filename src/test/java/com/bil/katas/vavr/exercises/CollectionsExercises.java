@@ -1,4 +1,4 @@
-package com.bil.katas.vavr.pet;
+package com.bil.katas.vavr.exercises;
 
 import io.vavr.collection.Map;
 import io.vavr.collection.Seq;
@@ -14,7 +14,7 @@ import java.util.Comparator;
 import java.util.function.Function;
 import java.util.function.Predicate;
 
-import static com.bil.katas.vavr.pet.PetType.*;
+import static com.bil.katas.vavr.exercises.PetType.*;
 import static java.lang.Integer.MAX_VALUE;
 
 /**
@@ -98,7 +98,7 @@ public class CollectionsExercises extends PetDomainKata {
 
     @Test
     public void getPeopleWithPets() {
-        Seq<Person> petPeople = this.people.filter(Person::isPetPerson); // replace with only the pet owners
+        Seq<Person> petPeople = this.people.filter(Person::isPetPerson); // replace with only the exercises owners
         Assert.assertThat(petPeople.size(), CoreMatchers.equalTo(7));
     }
 
@@ -207,7 +207,7 @@ public class CollectionsExercises extends PetDomainKata {
 
     @Test
     public void isThereAnyPetOlderThan4() {
-        // Check whether any pet older than 4 exists or not
+        // Check whether any exercises older than 4 exists or not
         boolean isThereAnyPetOlderThan4 =
                 people.flatMap(Person::getPets)
                         .find(pet -> pet.getAge() > 4)

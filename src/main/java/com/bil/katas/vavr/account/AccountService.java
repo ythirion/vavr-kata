@@ -3,11 +3,9 @@ package com.bil.katas.vavr.account;
 import io.vavr.control.Option;
 import io.vavr.control.Try;
 import lombok.AllArgsConstructor;
-import lombok.Data;
 
 import java.util.UUID;
 
-@Data
 @AllArgsConstructor
 public class AccountService {
 

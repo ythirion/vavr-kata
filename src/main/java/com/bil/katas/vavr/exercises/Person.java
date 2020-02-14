@@ -1,4 +1,4 @@
-package com.bil.katas.vavr.pet;
+package com.bil.katas.vavr.exercises;
 
 import io.vavr.collection.HashMap;
 import io.vavr.collection.Map;

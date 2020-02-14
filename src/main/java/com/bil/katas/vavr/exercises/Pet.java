@@ -1,4 +1,4 @@
-package com.bil.katas.vavr.pet;
+package com.bil.katas.vavr.exercises;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

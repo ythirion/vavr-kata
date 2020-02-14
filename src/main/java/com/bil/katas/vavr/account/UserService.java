@@ -20,7 +20,7 @@ public class UserService {
                     .build());
 
     public User findById(UUID id) throws NoSuchElementException {
-        return repository.filter(p -> p.getId() == id).single();
+        return repository.filter(p -> id.equals(p.getId())).single();
     }
 
     public void updateTwitterAccountId(UUID id, String twitterAccountId){
