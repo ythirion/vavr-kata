@@ -65,7 +65,7 @@ public class CollectionsExercises extends PetDomainKata {
     public void getPeopleWithoutCats() {
         // Replace null, with a negative filtering method on Seq.
         Seq<Person> peopleWithoutCats = people.reject(p -> p.hasPetType(CAT));
-         // null;  // this.people...
+        // null;  // this.people...
 
         Assert.assertThat(peopleWithoutCats.size(), CoreMatchers.equalTo(6));
     }

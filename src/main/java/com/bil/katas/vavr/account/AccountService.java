@@ -13,28 +13,28 @@ public class AccountService {
     private final TwitterService twitterService;
     private final BusinessLogger businessLogger;
 
-    private Try<RegistrationContext> createContext(UUID userId){
+    private Try<RegistrationContext> createContext(UUID userId) {
         return Try.of(() -> userService.findById(userId)).map(RegistrationContext::new);
     }
 
-    private Try<RegistrationContext> registerOnTwitter(RegistrationContext context){
+    private Try<RegistrationContext> registerOnTwitter(RegistrationContext context) {
         return Try.of(() -> twitterService.register(context.getEmail(), context.getName())).map(context::setAccountId);
     }
 
-    private Try<RegistrationContext> authenticateOnTwitter(RegistrationContext context){
+    private Try<RegistrationContext> authenticateOnTwitter(RegistrationContext context) {
         return Try.of(() -> twitterService.authenticate(context.getEmail(), context.getPassword())).map(context::setToken);
     }
 
-    private Try<RegistrationContext> tweet(RegistrationContext context){
+    private Try<RegistrationContext> tweet(RegistrationContext context) {
         return Try.of(() -> twitterService.tweet(context.getToken(), "Hello I am " + context.getName())).map(context::setTweetUrl);
     }
 
-    private void updateUser(RegistrationContext context){
+    private void updateUser(RegistrationContext context) {
         Try.run(() -> userService.updateTwitterAccountId(context.getId(), context.getAccountId()));
     }
 
 
-    public Option<String> register(UUID id){
+    public Option<String> register(UUID id) {
         return createContext(id)
                 .flatMap(this::registerOnTwitter)
                 .flatMap(this::authenticateOnTwitter)

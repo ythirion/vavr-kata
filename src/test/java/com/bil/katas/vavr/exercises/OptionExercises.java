@@ -67,7 +67,7 @@ public class OptionExercises extends PetDomainKata {
         String firstName = "Rick";
         String lastName = "Sanchez";
 
-        Person foundPerson = this.people.find(person -> person.getLastName() == lastName && person.getFirstName() == firstName)
+        Person foundPerson = this.people.find(person -> person.getLastName().equals(lastName) && person.getFirstName().equals(firstName))
                 .getOrElseThrow(() -> new IllegalArgumentException("No matching person"));
     }
 

@@ -1,6 +1,9 @@
 package com.bil.katas.vavr.exercises;
 
-import com.bil.katas.vavr.account.*;
+import com.bil.katas.vavr.account.AccountService;
+import com.bil.katas.vavr.account.BusinessLoggerImpl;
+import com.bil.katas.vavr.account.TwitterService;
+import com.bil.katas.vavr.account.UserService;
 import io.vavr.control.Option;
 import io.vavr.control.Try;
 import org.junit.Assert;
@@ -29,7 +32,7 @@ public class RealLifeExample {
     private AccountService accountService;
 
     @Before
-    public void setup(){
+    public void setup() {
         accountService = new AccountService(
                 new UserService(),
                 new TwitterService(),
@@ -37,14 +40,14 @@ public class RealLifeExample {
     }
 
     @Test
-    public void register_BudSpencer_should_return_a_new_tweet_url(){
-        String tweetUrl  = accountService.register(BUD_SPENCER).getOrElse("Registration failed");
+    public void register_BudSpencer_should_return_a_new_tweet_url() {
+        String tweetUrl = accountService.register(BUD_SPENCER).getOrElse("Registration failed");
         Assert.assertEquals("TweetUrl", tweetUrl);
     }
 
     @Test
-    public void register_an_unknown_user_should_return_an_error_message(){
-        String tweetUrl  = accountService.register(UNKNOWN_USER).getOrElse("Registration failed");
+    public void register_an_unknown_user_should_return_an_error_message() {
+        String tweetUrl = accountService.register(UNKNOWN_USER).getOrElse("Registration failed");
         Assert.assertEquals("Registration failed", tweetUrl);
     }
 }

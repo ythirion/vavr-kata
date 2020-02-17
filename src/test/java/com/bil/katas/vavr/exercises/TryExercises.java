@@ -13,19 +13,17 @@ import java.util.function.Function;
  * {@link Try#isSuccess()}<br>
  * {@link Try#isEmpty()}<br>
  * {@link Try#isFailure()}<br>
- * {@link Try#isFailure()}<br>
  * {@link Try#getOrElse(Object)}<br>
  * {@link Try#onFailure(Consumer)}<br>
  * {@link Try#onSuccess(Consumer)}<br>
  * {@link Try#flatMap(Function)}<br>
- *
  */
 public class TryExercises extends PetDomainKata {
 
     private final String SUCCESS_MESSAGE = "I m a fucking genius the result is ";
 
     @Test
-    public void getTheResultOfDivide(){
+    public void getTheResultOfDivide() {
         // Divide x = 9 by y = 2
         Try<Integer> tryResult = Divide(9, 2);
         Integer result = tryResult.get();
@@ -37,7 +35,7 @@ public class TryExercises extends PetDomainKata {
     }
 
     @Test
-    public void mapTheResultOfDivide(){
+    public void mapTheResultOfDivide() {
         // Divide x = 9 by y = 2 and add z to the result
         Integer z = 3;
         Integer result = Divide(9, 2).map(a -> a + z).get();
@@ -46,14 +44,14 @@ public class TryExercises extends PetDomainKata {
     }
 
     @Test(expected = ArithmeticException.class)
-    public void divideByZeroIsAlwaysAGoodIdea(){
+    public void divideByZeroIsAlwaysAGoodIdea() {
         // Divide x by 0 and get the result
         Integer x = 1;
         Divide(x, 0).get();
     }
 
     @Test
-    public void divideByZeroOrElse(){
+    public void divideByZeroOrElse() {
         // Divide x by 0, on exception returns 0
         Integer x = 1;
         Integer result = Divide(x, 0).getOrElse(0);
@@ -62,7 +60,7 @@ public class TryExercises extends PetDomainKata {
     }
 
     @Test
-    public void mapTheFailure(){
+    public void mapTheFailure() {
         // Divide x by 0, log the failure message to the console and get 0
         Integer x = 1;
 
@@ -74,7 +72,7 @@ public class TryExercises extends PetDomainKata {
     }
 
     @Test
-    public void mapTheSuccess(){
+    public void mapTheSuccess() {
         // Divide x by y
         // log the failure message to the console
         // Log your success to the console
@@ -91,7 +89,7 @@ public class TryExercises extends PetDomainKata {
     }
 
     @Test
-    public void chainTheTry(){
+    public void chainTheTry() {
         // Divide x by y
         // Chain 2 other calls to divide with x = previous Divide result
         // log the failure message to the console
