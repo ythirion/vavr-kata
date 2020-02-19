@@ -21,6 +21,10 @@ import java.util.function.Function;
 public class TryExercises extends PetDomainKata {
 
     private final String SUCCESS_MESSAGE = "I m a fucking genius the result is ";
+	
+	private Try<Integer> Divide(Integer x, Integer y) {
+        return Try.of(() -> x / y);
+    }
 
     @Test
     public void getTheResultOfDivide() {
@@ -94,9 +98,5 @@ public class TryExercises extends PetDomainKata {
         Integer result = 0;
 
         Assert.assertEquals(1, result, 0);
-    }
-
-    private Try<Integer> Divide(Integer x, Integer y) {
-        return Try.of(() -> x / y);
     }
 }

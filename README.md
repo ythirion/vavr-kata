@@ -10,3 +10,8 @@ DO the exercises in this order :
 * `OptionExercises`
 * `TryExercises`
 * `RealLifeExample`
+
+## Pre-requesites
+* Java 8
+* IDE : IntelliJ or Eclipse
+* Install lombok plugin [here](https://www.baeldung.com/lombok-ide)
