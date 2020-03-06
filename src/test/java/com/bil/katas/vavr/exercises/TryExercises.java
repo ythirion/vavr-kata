@@ -21,8 +21,8 @@ import java.util.function.Function;
 public class TryExercises extends PetDomainKata {
 
     private final String SUCCESS_MESSAGE = "I m a fucking genius the result is ";
-	
-	private Try<Integer> Divide(Integer x, Integer y) {
+
+    private Try<Integer> Divide(Integer x, Integer y) {
         return Try.of(() -> x / y);
     }
 
@@ -56,7 +56,7 @@ public class TryExercises extends PetDomainKata {
     public void divideByZeroOrElse() {
         // Divide x by 0, on exception returns 0
         Integer x = 1;
-        Integer result = 0;
+        Integer result = -1;
 
         Assert.assertEquals(0, result, 0);
     }
@@ -66,7 +66,7 @@ public class TryExercises extends PetDomainKata {
         // Divide x by 0, log the failure message to the console and get 0
         Integer x = 1;
 
-        Integer result = 0;
+        Integer result = -1;
 
         Assert.assertEquals(0, result, 0);
     }
