@@ -6,6 +6,7 @@ Pre-requesite is to understand functional programming paradigm.
 
 DO the exercises in this order :
 
+* `PureFunctions`
 * `CollectionsExercises`
 * `OptionExercises`
 * `TryExercises`
