@@ -16,6 +16,7 @@ import java.util.function.Predicate;
 
 import static com.bil.katas.vavr.exercises.PetType.*;
 import static java.lang.Integer.MAX_VALUE;
+import static java.lang.Integer.MIN_VALUE;
 
 /**
  * By doing these exercises you should have learned about the following APIs.
@@ -131,7 +132,7 @@ public class CollectionsExercises extends PetDomainKata {
     @Test
     public void whoOwnsTheOldestPet() {
         // use maxBy + max
-        Option<Person> person = people.maxBy(p -> p.getPets().map(Pet::getAge).max().getOrElse(MAX_VALUE));
+        Option<Person> person = people.maxBy(p -> p.getPets().map(Pet::getAge).max().getOrElse(MIN_VALUE));
         Assert.assertEquals("John", person.get().getFirstName());
     }
 
