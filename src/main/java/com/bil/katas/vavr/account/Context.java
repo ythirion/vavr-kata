@@ -1,18 +1,20 @@
 package com.bil.katas.vavr.account;
 
-import lombok.Data;
-import lombok.experimental.Accessors;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.With;
 
 import java.util.UUID;
 
-@Data
-@Accessors(chain = true)
-public class RegistrationContext {
+@AllArgsConstructor
+@With
+@Getter
+public class Context {
     private UUID id;
     private String email, name, password;
     private String accountId, token, tweetUrl;
 
-    public RegistrationContext(User user) {
+    public Context(User user) {
         this.id = user.getId();
         this.email = user.getEmail();
         this.name = user.getName();

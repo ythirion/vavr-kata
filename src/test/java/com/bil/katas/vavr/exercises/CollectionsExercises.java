@@ -133,7 +133,7 @@ public class CollectionsExercises extends PetDomainKata {
     public void whoOwnsTheOldestPet() {
         // use maxBy + max
         Option<Person> person = people.maxBy(p -> p.getPets().map(Pet::getAge).max().getOrElse(MIN_VALUE));
-        Assert.assertEquals("John", person.get().getFirstName());
+        Assert.assertEquals("Ted", person.get().getFirstName());
     }
 
     @Test

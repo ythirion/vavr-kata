@@ -9,4 +9,9 @@ DO the exercises in this order :
 * `CollectionsExercises`
 * `OptionExercises`
 * `TryExercises`
-* `RealLifeExample`
+* [`RealLifeExample`](reallife-step-by-step.md)
+
+### To go further ?
+[Practical vavr](https://leanpub.com/practical-vavr)
+
+![1](img/practical-vavr.png)

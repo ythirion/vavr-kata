@@ -13,36 +13,39 @@ public class AccountService {
     private final TwitterService twitterService;
     private final BusinessLogger businessLogger;
 
-    private Try<RegistrationContext> createContext(UUID userId) {
-        return Try.of(() -> userService.findById(userId)).map(RegistrationContext::new);
-    }
-
-    private Try<RegistrationContext> registerOnTwitter(RegistrationContext context) {
-        return Try.of(() -> twitterService.register(context.getEmail(), context.getName())).map(context::setAccountId);
-    }
-
-    private Try<RegistrationContext> authenticateOnTwitter(RegistrationContext context) {
-        return Try.of(() -> twitterService.authenticate(context.getEmail(), context.getPassword())).map(context::setToken);
-    }
-
-    private Try<RegistrationContext> tweet(RegistrationContext context) {
-        return Try.of(() -> twitterService.tweet(context.getToken(), "Hello I am " + context.getName())).map(context::setTweetUrl);
-    }
-
-    private void updateUser(RegistrationContext context) {
-        Try.run(() -> userService.updateTwitterAccountId(context.getId(), context.getAccountId()));
-    }
-
-
     public Option<String> register(UUID id) {
-        return createContext(id)
-                .flatMap(this::registerOnTwitter)
+        return retrieveUserDetails(id)
+                .flatMap(this::registerAccountOnTwitter)
                 .flatMap(this::authenticateOnTwitter)
-                .flatMap(this::tweet)
-                .andThen(this::updateUser)
-                .andThen(context -> businessLogger.logSuccessRegister(context.getId()))
+                .flatMap(this::tweetHello)
+                .andThen(this::updateTwitterAccount)
+                .onSuccess(context -> businessLogger.logSuccessRegister(id))
                 .onFailure(exception -> businessLogger.logFailureRegister(id, exception))
-                .map(RegistrationContext::getTweetUrl)
+                .map(Context::getTweetUrl)
                 .toOption();
+    }
+
+    private Try<Context> retrieveUserDetails(UUID id) {
+        return Try.of(() -> this.userService.findById(id))
+                .map(Context::new);
+    }
+
+    private Try<Context> registerAccountOnTwitter(Context context) {
+        return Try.of(() -> this.twitterService.register(context.getEmail(), context.getName()))
+                .map(context::withAccountId);
+    }
+
+    private Try<Context> authenticateOnTwitter(Context context) {
+        return Try.of(() -> this.twitterService.authenticate(context.getEmail(), context.getPassword()))
+                .map(context::withToken);
+    }
+
+    private Try<Context> tweetHello(Context context) {
+        return Try.of(() -> this.twitterService.tweet(context.getToken(), "Hello I am " + context.getName()))
+                .map(context::withTweetUrl);
+    }
+
+    private void updateTwitterAccount(Context context) {
+        this.userService.updateTwitterAccountId(context.getId(), context.getAccountId());
     }
 }
