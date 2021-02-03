@@ -32,7 +32,7 @@ this.userService.findById(id) // Retrieve a user details
   | this.twitterService.authenticate(user.getEmail(), user.getPassword()) // Authenticate on Twitter
   | this.twitterService.tweet(twitterToken, "Hello I am " + user.getName()) // Tweet *Hello I am ...*
   | this.userService.updateTwitterAccountId(id, accountId) // Update the user details with the Twitter account id
-	| this.businessLogger.logSuccessRegister(id) // Log something in case of success
+  | this.businessLogger.logSuccessRegister(id) // Log something in case of success
   | this.businessLogger.logFailureRegister(id, ex) // In case of error anywhere log something also
   | tweetUrl // Return the tweet URL
 ```
@@ -309,6 +309,7 @@ private Try<Context> doSomething(Context context)
 ```java
 @AllArgsConstructor
 @With //requires lombok >= 1.18.18
+@Getter
 public class Context {
     private UUID id;
     private String email, name, password;
