@@ -31,7 +31,7 @@ public class OptionExercises extends PetDomainKata {
                 Option.none());
 
 
-        Seq<Person> definedPersons = persons.filter(people -> people.isDefined())
+        Seq<Person> definedPersons = persons.filter(Option::isDefined)
                 .flatMap(person -> person);
 
         Assert.assertEquals(2, definedPersons.length());
@@ -44,7 +44,7 @@ public class OptionExercises extends PetDomainKata {
         // then it must return the string "Ich bin empty" if empty
         Option<String> iamAnOption = Option.of(null);
         String optionValue = iamAnOption
-                .map(p -> p.toUpperCase())
+                .map(String::toUpperCase)
                 .getOrElse("Ich bin empty");
 
         Assert.assertTrue(iamAnOption.isEmpty());
@@ -54,8 +54,8 @@ public class OptionExercises extends PetDomainKata {
     @Test
     public void findKaradoc() {
         // Find Karadoc in the people List or returns Perceval
-        String foundPersonLastName = this.people.find(p -> p.named("Karadoc"))
-                .map(person -> person.getLastName())
+        String foundPersonLastName = this.people.filter(p -> p.named("Karadoc"))
+                .map(Person::getLastName)
                 .getOrElse("Perceval");
 
         Assert.assertEquals("Perceval", foundPersonLastName);
