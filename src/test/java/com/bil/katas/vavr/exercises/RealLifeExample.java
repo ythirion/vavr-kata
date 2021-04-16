@@ -6,13 +6,17 @@ import com.bil.katas.vavr.account.TwitterService;
 import com.bil.katas.vavr.account.UserService;
 import io.vavr.control.Option;
 import io.vavr.control.Try;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.UUID;
 import java.util.function.Consumer;
 import java.util.function.Function;
+
+import static me.grison.vavr.matchers.VavrMatchers.isDefined;
+import static me.grison.vavr.matchers.VavrMatchers.isEmpty;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.equalTo;
 
 /**
  * In this real life example you will have to combine what you have learned on vavr
@@ -31,7 +35,7 @@ public class RealLifeExample {
 
     private AccountService accountService;
 
-    @BeforeAll
+    @BeforeEach
     public void setup() {
         accountService = new AccountService(
                 new UserService(),
@@ -41,13 +45,13 @@ public class RealLifeExample {
 
     @Test
     public void register_BudSpencer_should_return_a_new_tweet_url() {
-        String tweetUrl = accountService.register(BUD_SPENCER).getOrElse("Registration failed");
-        Assertions.assertEquals("TweetUrl", tweetUrl);
+        Option<String> tweetUrl = accountService.register(BUD_SPENCER);
+        assertThat(tweetUrl, isDefined(equalTo("TweetUrl")));
     }
 
     @Test
     public void register_an_unknown_user_should_return_an_error_message() {
-        String tweetUrl = accountService.register(UNKNOWN_USER).getOrElse("Registration failed");
-        Assertions.assertEquals("Registration failed", tweetUrl);
+        Option<String> tweetUrl = accountService.register(UNKNOWN_USER);
+        assertThat(tweetUrl, isEmpty());
     }
 }
