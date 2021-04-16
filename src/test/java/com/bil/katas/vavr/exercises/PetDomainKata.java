@@ -2,14 +2,14 @@ package com.bil.katas.vavr.exercises;
 
 import io.vavr.collection.Seq;
 import io.vavr.collection.Vector;
-import org.junit.Before;
+import org.junit.jupiter.api.BeforeEach;
 
 public abstract class PetDomainKata {
     protected Seq<Person> people;
     protected Seq<Park> parks;
 
-    @Before
-    public void setUp() throws Exception {
+    @BeforeEach
+    public void setUp() {
         this.people = Vector.of(
                 new Person("Mary", "Smith").addPet(PetType.CAT, "Tabby", 2),
                 new Person("Bob", "Smith")

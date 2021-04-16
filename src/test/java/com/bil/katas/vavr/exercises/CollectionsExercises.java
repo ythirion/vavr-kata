@@ -2,14 +2,9 @@ package com.bil.katas.vavr.exercises;
 
 import io.vavr.collection.Map;
 import io.vavr.collection.Seq;
-import io.vavr.collection.Vector;
 import io.vavr.control.Option;
-import org.hamcrest.CoreMatchers;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
-import java.math.BigDecimal;
-import java.math.RoundingMode;
 import java.util.Comparator;
 import java.util.function.Function;
 import java.util.function.Predicate;
@@ -17,6 +12,12 @@ import java.util.function.Predicate;
 import static com.bil.katas.vavr.exercises.PetType.*;
 import static java.lang.Integer.MAX_VALUE;
 import static java.lang.Integer.MIN_VALUE;
+import static me.grison.vavr.matchers.VavrMatchers.*;
+import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.CoreMatchers.not;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.closeTo;
+import static org.hamcrest.Matchers.is;
 
 /**
  * By doing these exercises you should have learned about the following APIs.
@@ -33,14 +34,16 @@ import static java.lang.Integer.MIN_VALUE;
  * {@link Seq#count(Predicate)}<br>
  * <p>
  */
+
 public class CollectionsExercises extends PetDomainKata {
     @Test
     public void getFirstNamesOfAllPeople() {
         // Replace null, with a transformation method on Seq.
-        Seq<String> firstNames = this.people.map(Person::getFirstName);//null; // this.people...
+        Seq<String> firstNames = this.people.map(Person::getFirstName);
 
-        Seq<String> expectedFirstNames = Vector.of("Mary", "Bob", "Ted", "Jake", "Barry", "Terry", "Harry", "John");
-        Assert.assertEquals(expectedFirstNames, firstNames);
+        assertThat(firstNames, not(isEmpty()));
+        assertThat(firstNames, hasLength(8));
+        assertThat(firstNames, containsInOrder("Mary", "Bob", "Ted", "Jake", "Barry", "Terry", "Harry", "John"));
     }
 
     @Test
@@ -49,58 +52,56 @@ public class CollectionsExercises extends PetDomainKata {
         Seq<Pet> pets = person.getPets();
 
         // Replace null, with a transformation method on Seq.
-        Seq<String> names = pets.map(Pet::getName); // null; // pets...
+        Seq<String> names = pets.map(Pet::getName);
 
-        Assert.assertEquals("Tabby", names.mkString());
+        assertThat("Tabby", equalTo(names.mkString()));
     }
 
     @Test
     public void getPeopleWithCats() {
         // Replace null, with a positive filtering method on Seq.
         Seq<Person> peopleWithCats = people.filter(p -> p.hasPetType(CAT));// null;  // this.people...
-
-        Assert.assertThat(peopleWithCats.size(), CoreMatchers.equalTo(2));
+        assertThat(peopleWithCats, hasLength(2));
     }
 
     @Test
     public void getPeopleWithoutCats() {
         // Replace null, with a negative filtering method on Seq.
         Seq<Person> peopleWithoutCats = people.reject(p -> p.hasPetType(CAT));
-        // null;  // this.people...
-
-        Assert.assertThat(peopleWithoutCats.size(), CoreMatchers.equalTo(6));
+        assertThat(peopleWithoutCats, hasLength(6));
     }
 
     @Test
     public void doAnyPeopleHaveCats() {
-        boolean doAnyPeopleHaveCats = people.find(p -> p.hasPetType(CAT)).isDefined(); // null; //replace null with a Predicate lambda which checks for PetType.CAT
-        Assert.assertTrue(doAnyPeopleHaveCats);
+        boolean doAnyPeopleHaveCats = people.find(p -> p.hasPetType(CAT)).isDefined();
+        assertThat(doAnyPeopleHaveCats, is(true));
     }
 
     @Test
     public void doAllPeopleHavePets() {
         Predicate<Person> predicate = Person::isPetPerson;
         boolean result = people.forAll(predicate); // true; //replace with a method call send to this.people that checks if all people have pets
-        Assert.assertFalse(result);
+        assertThat(result, is(false));
     }
 
     @Test
     public void howManyPeopleHaveCats() {
         int count = people.count(p -> p.hasPetType(CAT)); // replace 0 with the correct answer
-        Assert.assertEquals(2, count);
+        assertThat(count, equalTo(2));
     }
 
     @Test
     public void findMarySmith() {
         Person result = this.getPersonNamed("Mary Smith");
-        Assert.assertEquals("Mary", result.getFirstName());
-        Assert.assertEquals("Smith", result.getLastName());
+
+        assertThat(result.getFirstName(), equalTo("Mary"));
+        assertThat(result.getLastName(), equalTo("Smith"));
     }
 
     @Test
     public void getPeopleWithPets() {
         Seq<Person> petPeople = this.people.filter(Person::isPetPerson); // replace with only the exercises owners
-        Assert.assertThat(petPeople.size(), CoreMatchers.equalTo(7));
+        assertThat(petPeople, hasLength(7));
     }
 
     @Test
@@ -108,45 +109,46 @@ public class CollectionsExercises extends PetDomainKata {
         Seq<PetType> petTypes = people.map(Person::getPetTypes)
                 .map(Map::keySet)
                 .flatMap(Function.identity()).distinct();
-        Assert.assertEquals(
-                Vector.of(CAT, DOG, SNAKE, BIRD, TURTLE, HAMSTER),
-                petTypes);
-    }
 
+        assertThat(petTypes, hasLength(6));
+        assertThat(petTypes, containsInOrder(CAT, DOG, SNAKE, BIRD, TURTLE, HAMSTER));
+    }
 
     //region count, minBy, maxBy, min, max
     @Test
     public void howManyPersonHaveCats() {
         // use count
         int count = people.count(p -> p.hasPetType(CAT));
-        Assert.assertEquals(2, count);
+        assertThat(count, equalTo(2));
     }
 
     @Test
     public void whoOwnsTheYoungestPet() {
         // use minBy + min
         Option<Person> person = people.minBy(p -> p.getPets().map(Pet::getAge).min().getOrElse(MAX_VALUE));
-        Assert.assertEquals("Jake", person.get().getFirstName());
+        assertThat(person, isDefined());
+        assertThat(person.get().getFirstName(), equalTo("Jake"));
     }
 
     @Test
     public void whoOwnsTheOldestPet() {
         // use maxBy + max
         Option<Person> person = people.maxBy(p -> p.getPets().map(Pet::getAge).max().getOrElse(MIN_VALUE));
-        Assert.assertEquals("Ted", person.get().getFirstName());
+        assertThat(person, isDefined());
+        assertThat(person.get().getFirstName(), equalTo("Ted"));
     }
 
     @Test
     public void averagePetAge() {
         Option<Double> average = people.flatMap(Person::getPets).map(Pet::getAge).average();
-        Assert.assertEquals("1.89", new BigDecimal(average.get())
-                .setScale(2, RoundingMode.HALF_EVEN).toPlainString());
+        assertThat(average, isDefined());
+        assertThat(average.get(), closeTo(1.89, 0.1));
     }
 
     @Test
     public void totalPetAge() {
         Number average = people.flatMap(Person::getPets).map(Pet::getAge).sum();
-        Assert.assertEquals(17L, average);
+        assertThat(average, equalTo(17L));
     }
     //endregion
 
@@ -154,7 +156,7 @@ public class CollectionsExercises extends PetDomainKata {
     @Test
     public void petsNameSorted() {
         String sortedPetNames = people.flatMap(Person::getPets).map(Pet::getName).sorted().mkString(",");
-        Assert.assertEquals("Dolly,Fuzzy,Serpy,Speedy,Spike,Spot,Tabby,Tweety,Wuzzy", sortedPetNames);
+        assertThat(sortedPetNames, equalTo("Dolly,Fuzzy,Serpy,Speedy,Spike,Spot,Tabby,Tweety,Wuzzy"));
     }
     //endregion
 
@@ -167,8 +169,8 @@ public class CollectionsExercises extends PetDomainKata {
                         .distinct()
                         .sorted();
 
-        Assert.assertThat(sortedAgeList.size(), CoreMatchers.equalTo(4));
-        Assert.assertEquals(Vector.of(1, 2, 3, 4), sortedAgeList);
+        assertThat(sortedAgeList, hasLength(4));
+        assertThat(sortedAgeList, containsInOrder(1, 2, 3, 4));
     }
 
     @Test
@@ -179,8 +181,8 @@ public class CollectionsExercises extends PetDomainKata {
                         .distinct()
                         .sorted(Comparator.reverseOrder());
 
-        Assert.assertThat(sortedAgeList.size(), CoreMatchers.equalTo(4));
-        Assert.assertEquals(Vector.of(4, 3, 2, 1), sortedAgeList);
+        assertThat(sortedAgeList, hasLength(4));
+        assertThat(sortedAgeList, containsInOrder(4, 3, 2, 1));
     }
 
     @Test
@@ -191,8 +193,8 @@ public class CollectionsExercises extends PetDomainKata {
                         .sortBy(Comparator.reverseOrder(), Pet::getAge)
                         .slice(0, 3);
 
-        Assert.assertThat(top3OlderPets.size(), CoreMatchers.equalTo(3));
-        Assert.assertEquals(Vector.of("Spike", "Dolly", "Tabby"), top3OlderPets.map(Pet::getName));
+        assertThat(top3OlderPets, hasLength(3));
+        assertThat(top3OlderPets.map(Pet::getName), containsInOrder("Spike", "Dolly", "Tabby"));
     }
 
     @Test
@@ -202,8 +204,8 @@ public class CollectionsExercises extends PetDomainKata {
                 people.filter(person -> person.getPets().size() >= 2)
                         .headOption();
 
-        Assert.assertTrue(firstPersonWithAtLeast2Pets.isDefined());
-        Assert.assertEquals("Bob", firstPersonWithAtLeast2Pets.get().getFirstName());
+        assertThat(firstPersonWithAtLeast2Pets, isDefined());
+        assertThat(firstPersonWithAtLeast2Pets.get().getFirstName(), equalTo("Bob"));
     }
 
     @Test
@@ -214,7 +216,7 @@ public class CollectionsExercises extends PetDomainKata {
                         .find(pet -> pet.getAge() > 4)
                         .isDefined();
 
-        Assert.assertFalse(isThereAnyPetOlderThan4);
+        assertThat(isThereAnyPetOlderThan4, is(false));
     }
 
     @Test
@@ -225,7 +227,7 @@ public class CollectionsExercises extends PetDomainKata {
                         .filter(pet -> pet.getAge() < 1)
                         .isEmpty();
 
-        Assert.assertTrue(allOlderThan1);
+        assertThat(allOlderThan1, is(true));
     }
 
     private Seq<String> filterParksFor(Seq<PetType> petTypes) {
@@ -236,11 +238,10 @@ public class CollectionsExercises extends PetDomainKata {
     public void getListOfPossibleParksForAWalkPerPerson() {
         // For each person described as "firstName lastName" returns the list of names possible parks to go for a walk
         Map<String, Seq<String>> possibleParksForAWalkPerPerson =
-                people.groupBy(person -> person)
-                        .mapKeys(person -> person.getFirstName() + " " + person.getLastName())
+                people.groupBy(person -> person.getFirstName() + " " + person.getLastName())
                         .mapValues(persons -> persons.flatMap(person -> filterParksFor(person.getPets().map(Pet::getType))));
 
-        Assert.assertEquals(Vector.of("Jurassic", "Central", "Hippy"), possibleParksForAWalkPerPerson.get("John Doe").get());
-        Assert.assertEquals(Vector.of("Jurassic", "Hippy"), possibleParksForAWalkPerPerson.get("Jake Snake").get());
+        assertThat(possibleParksForAWalkPerPerson.get("John Doe").get(), containsInAnyOrder("Jurassic", "Central", "Hippy"));
+        assertThat(possibleParksForAWalkPerPerson.get("Jake Snake").get(), containsInAnyOrder("Jurassic", "Hippy"));
     }
 }

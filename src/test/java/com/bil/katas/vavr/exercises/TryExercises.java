@@ -1,8 +1,8 @@
 package com.bil.katas.vavr.exercises;
 
 import io.vavr.control.Try;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 import java.util.function.Consumer;
 import java.util.function.Function;
@@ -28,10 +28,10 @@ public class TryExercises extends PetDomainKata {
         Try<Integer> tryResult = Divide(9, 2);
         Integer result = tryResult.get();
 
-        Assert.assertEquals(4, result, 0);
-        Assert.assertTrue(tryResult.isSuccess());
-        Assert.assertFalse(tryResult.isEmpty());
-        Assert.assertFalse(tryResult.isFailure());
+        Assertions.assertEquals(4, result, 0);
+        Assertions.assertTrue(tryResult.isSuccess());
+        Assertions.assertFalse(tryResult.isEmpty());
+        Assertions.assertFalse(tryResult.isFailure());
     }
 
     @Test
@@ -40,14 +40,13 @@ public class TryExercises extends PetDomainKata {
         Integer z = 3;
         Integer result = Divide(9, 2).map(a -> a + z).get();
 
-        Assert.assertEquals(7, result, 0);
+        Assertions.assertEquals(7, result, 0);
     }
 
-    @Test(expected = ArithmeticException.class)
+    @Test
     public void divideByZeroIsAlwaysAGoodIdea() {
         // Divide x by 0 and get the result
-        Integer x = 1;
-        Divide(x, 0).get();
+        Assertions.assertThrows(ArithmeticException.class, () -> Divide(1, 0).get());
     }
 
     @Test
@@ -56,7 +55,7 @@ public class TryExercises extends PetDomainKata {
         Integer x = 1;
         Integer result = Divide(x, 0).getOrElse(0);
 
-        Assert.assertEquals(0, result, 0);
+        Assertions.assertEquals(0, result, 0);
     }
 
     @Test
@@ -68,7 +67,7 @@ public class TryExercises extends PetDomainKata {
                 .onFailure(failure -> System.out.println(failure.getMessage()))
                 .getOrElse(0);
 
-        Assert.assertEquals(0, result, 0);
+        Assertions.assertEquals(0, result, 0);
     }
 
     @Test
@@ -85,7 +84,7 @@ public class TryExercises extends PetDomainKata {
                 .onSuccess(success -> System.out.println(SUCCESS_MESSAGE + success))
                 .getOrElse(0);
 
-        Assert.assertEquals(2, result, 0);
+        Assertions.assertEquals(2, result, 0);
     }
 
     @Test
@@ -105,7 +104,7 @@ public class TryExercises extends PetDomainKata {
                 .onSuccess(success -> System.out.println(SUCCESS_MESSAGE + success))
                 .getOrElse(12);
 
-        Assert.assertEquals(1, result, 0);
+        Assertions.assertEquals(1, result, 0);
     }
 
     private Try<Integer> Divide(Integer x, Integer y) {

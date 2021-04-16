@@ -3,12 +3,13 @@ package com.bil.katas.vavr.exercises;
 import io.vavr.collection.Seq;
 import io.vavr.collection.Vector;
 import io.vavr.control.Option;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.Supplier;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * By doing these exercises you should have learned :
@@ -34,7 +35,7 @@ public class OptionExercises extends PetDomainKata {
         Seq<Person> definedPersons = persons.filter(Option::isDefined)
                 .flatMap(person -> person);
 
-        Assert.assertEquals(2, definedPersons.length());
+        assertEquals(2, definedPersons.length());
     }
 
     @Test
@@ -47,8 +48,8 @@ public class OptionExercises extends PetDomainKata {
                 .map(String::toUpperCase)
                 .getOrElse("Ich bin empty");
 
-        Assert.assertTrue(iamAnOption.isEmpty());
-        Assert.assertEquals("Ich bin empty", optionValue);
+        assertTrue(iamAnOption.isEmpty());
+        assertEquals("Ich bin empty", optionValue);
     }
 
     @Test
@@ -58,17 +59,19 @@ public class OptionExercises extends PetDomainKata {
                 .map(Person::getLastName)
                 .getOrElse("Perceval");
 
-        Assert.assertEquals("Perceval", foundPersonLastName);
+        assertEquals("Perceval", foundPersonLastName);
     }
 
-    @Test(expected = IllegalArgumentException.class)
-    public void findPersonOrDieTryin() {
+    @Test
+    public void findPersonOrDieTryIn() {
         // Find a person matching firstName and lastName, throws an IllegalArgumentException if not found
         String firstName = "Rick";
         String lastName = "Sanchez";
 
-        Person foundPerson = this.people.find(person -> person.getLastName().equals(lastName) && person.getFirstName().equals(firstName))
-                .getOrElseThrow(() -> new IllegalArgumentException("No matching person"));
+        assertThrows(IllegalArgumentException.class,
+                () -> this.people
+                        .find(person -> person.getLastName().equals(lastName) && person.getFirstName().equals(firstName))
+                        .getOrElseThrow(() -> new IllegalArgumentException("No matching person")));
     }
 
     @Test
@@ -87,8 +90,8 @@ public class OptionExercises extends PetDomainKata {
                 .flatMap(this::half)
                 .peek(resultBuilder::append);
 
-        Assert.assertEquals(result, Option.none());
-        Assert.assertEquals("250.0125.0", resultBuilder.toString());
+        assertEquals(result, Option.none());
+        assertEquals("250.0125.0", resultBuilder.toString());
     }
 
     private Option<Double> half(Double x) {

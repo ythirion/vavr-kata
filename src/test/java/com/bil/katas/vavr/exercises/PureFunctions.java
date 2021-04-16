@@ -5,22 +5,21 @@ import io.vavr.collection.Seq;
 import io.vavr.collection.Vector;
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;
 
 public class PureFunctions {
 
     @Test
-
     public void calculate_rentals() {
         Seq<Rental> rentals = Vector.of(
                 new Rental(LocalDate.of(2020, 10, 9), "Le Refuge des Loups (LA BRESSE)", 1089.90),
                 new Rental(LocalDate.of(2020, 10, 12), "Au pied de la Tour (NOUILLORC)", 1276.45),
                 new Rental(LocalDate.of(2020, 10, 24), "Le moulin du bonheur (GLANDAGE)", 670.89));
 
-        Assert.assertEquals(3037.24, RentalCalculator.calculateRental.apply(rentals), 0.01);
+        Assertions.assertEquals(3037.24, RentalCalculator.calculateRental.apply(rentals), 0.01);
     }
 }
 

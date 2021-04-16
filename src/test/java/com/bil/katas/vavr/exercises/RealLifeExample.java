@@ -6,9 +6,9 @@ import com.bil.katas.vavr.account.TwitterService;
 import com.bil.katas.vavr.account.UserService;
 import io.vavr.control.Option;
 import io.vavr.control.Try;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
 
 import java.util.UUID;
 import java.util.function.Consumer;
@@ -31,7 +31,7 @@ public class RealLifeExample {
 
     private AccountService accountService;
 
-    @Before
+    @BeforeAll
     public void setup() {
         accountService = new AccountService(
                 new UserService(),
@@ -42,12 +42,12 @@ public class RealLifeExample {
     @Test
     public void register_BudSpencer_should_return_a_new_tweet_url() {
         String tweetUrl = accountService.register(BUD_SPENCER).getOrElse("Registration failed");
-        Assert.assertEquals("TweetUrl", tweetUrl);
+        Assertions.assertEquals("TweetUrl", tweetUrl);
     }
 
     @Test
     public void register_an_unknown_user_should_return_an_error_message() {
         String tweetUrl = accountService.register(UNKNOWN_USER).getOrElse("Registration failed");
-        Assert.assertEquals("Registration failed", tweetUrl);
+        Assertions.assertEquals("Registration failed", tweetUrl);
     }
 }
