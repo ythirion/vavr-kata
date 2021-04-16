@@ -9,7 +9,11 @@ import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.Supplier;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static me.grison.vavr.matchers.VavrMatchers.hasLength;
+import static me.grison.vavr.matchers.VavrMatchers.isEmpty;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.equalTo;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 /**
  * By doing these exercises you should have learned :
@@ -35,7 +39,7 @@ public class OptionExercises extends PetDomainKata {
         Seq<Person> definedPersons = persons.filter(Option::isDefined)
                 .flatMap(person -> person);
 
-        assertEquals(2, definedPersons.length());
+        assertThat(definedPersons, hasLength(2));
     }
 
     @Test
@@ -48,8 +52,8 @@ public class OptionExercises extends PetDomainKata {
                 .map(String::toUpperCase)
                 .getOrElse("Ich bin empty");
 
-        assertTrue(iamAnOption.isEmpty());
-        assertEquals("Ich bin empty", optionValue);
+        assertThat(iamAnOption, isEmpty());
+        assertThat(optionValue, equalTo("Ich bin empty"));
     }
 
     @Test
@@ -59,7 +63,7 @@ public class OptionExercises extends PetDomainKata {
                 .map(Person::getLastName)
                 .getOrElse("Perceval");
 
-        assertEquals("Perceval", foundPersonLastName);
+        assertThat(foundPersonLastName, equalTo("Perceval"));
     }
 
     @Test
@@ -69,8 +73,7 @@ public class OptionExercises extends PetDomainKata {
         String lastName = "Sanchez";
 
         assertThrows(IllegalArgumentException.class,
-                () -> this.people
-                        .find(person -> person.getLastName().equals(lastName) && person.getFirstName().equals(firstName))
+                () -> this.people.find(person -> person.getLastName().equals(lastName) && person.getFirstName().equals(firstName))
                         .getOrElseThrow(() -> new IllegalArgumentException("No matching person")));
     }
 
@@ -90,8 +93,8 @@ public class OptionExercises extends PetDomainKata {
                 .flatMap(this::half)
                 .peek(resultBuilder::append);
 
-        assertEquals(result, Option.none());
-        assertEquals("250.0125.0", resultBuilder.toString());
+        assertThat(result, isEmpty());
+        assertThat(resultBuilder.toString(), equalTo("250.0125.0"));
     }
 
     private Option<Double> half(Double x) {
