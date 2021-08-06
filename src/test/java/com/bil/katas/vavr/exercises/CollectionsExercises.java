@@ -10,12 +10,10 @@ import org.junit.Test;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
-import java.util.Comparator;
 import java.util.function.Function;
 import java.util.function.Predicate;
 
 import static com.bil.katas.vavr.exercises.PetType.*;
-import static java.lang.Integer.MAX_VALUE;
 
 /**
  * By doing these exercises you should have learned about the following APIs.
@@ -133,7 +131,7 @@ public class CollectionsExercises extends PetDomainKata {
     public void whoOwnsTheOldestPet() {
         // find the person who owns the oldest pet
         Option<Person> person = null;
-        Assert.assertEquals("John", person.get().getFirstName());
+        Assert.assertEquals("Ted", person.get().getFirstName());
     }
 
     @Test
